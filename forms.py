@@ -4,5 +4,14 @@ from wtforms.validators import DataRequired, Email, Length
 
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
+    password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Login")
+
+class RegisterForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
+    submit = SubmitField("Register")
+
+class ForgotPasswordForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    submit = SubmitField("Send Reset Link")
