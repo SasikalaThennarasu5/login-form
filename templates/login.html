@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="weather-card">
+    <h2>{{ data.city }} - {{ date }}</h2>
+    <img src="{{ url_for('static', filename='images/' ~ ('sun.png' if data.condition == 'Sunny' else 'rain.png')) }}"
+         alt="{{ data.condition }}" width="100">
+    <p>Temperature: <strong>{{ data.temperature }}°C</strong></p>
+    <p>Condition: {{ data.condition }}</p>
+
+    {% if data.temperature > 30 %}
+        <p class="alert">Stay Hydrated! 🥤</p>
+    {% endif %}
+</div>
+
+<canvas id="tempChart" width="400" height="200"></canvas>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+    renderTemperatureChart({{ data.temps | safe }});
+</script>
+{% endblock %}
